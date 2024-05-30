@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebApplication1.Model.Models.AssignmentModel>
+
+@{
+    ViewBag.Title = "Submitted";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Submitted</h2>
+
+<table class="table table-bordered">
+    <tr class="table-success">
+        <th>Task Name</th>
+        <th>Task Description</th>
+        <th>Deadline</th>
+        <th>Teacher Name</th>
+        <th>Current Status</th>
+    </tr>
+
+    @foreach (List<string> item in ViewBag.Tasks)
+    {
+        <tr>
+            <td>
+                @item[0]
+            </td>
+            <td>
+                @item[1]
+            </td>
+            <td>
+                @item[2]
+            </td>
+            <td>
+                @item[3]
+            </td>
+            <td>
+                @if (Convert.ToInt32(item[5]) == 1)
+                {
+                    <span class="text-success">Submitted</span>
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Go Back", "Dashboard")

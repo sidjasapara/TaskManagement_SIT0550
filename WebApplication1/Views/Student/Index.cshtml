@@ -1,0 +1,84 @@
+﻿@model WebApplication1.Model.Models.AssignmentModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="col-md-10">Task List</h2>
+
+<table class="table table-bordered">
+    <tr class="table-info">
+        <th>Task Name</th>
+        <th>Task Description</th>
+        <th>Deadline</th>
+        <th>Teacher Name</th>
+        <th>Current Status</th>
+        <th>Mark As Completed</th>
+    </tr>
+
+    @foreach (List<string> item in ViewBag.Tasks)
+    {
+        <tr>
+            <td>
+                @item[0]
+            </td>
+            <td>
+                @item[1]
+            </td>
+            <td>
+                @item[2]
+            </td>
+            <td>
+                @item[3]
+            </td>
+            <td>
+                @if (Convert.ToInt32(item[5]) == 0 && Convert.ToDateTime(item[2]) < DateTime.Now)
+                {
+                    <span class="text-danger">Past Deadline</span>
+                }
+                else if (Convert.ToInt32(item[5]) == 0 && Convert.ToDateTime(item[2]) > DateTime.Now)
+                {
+                    <span class="text-warning">Pending</span>
+                }
+                else
+                {
+                    <span class="text-success">Completed</span>
+                }
+            </td>
+            <td class="ml-2">
+                @if (Convert.ToInt32(item[5]) == 0 && Convert.ToDateTime(item[2]) > DateTime.Now)
+                {
+                    <input type="checkbox" class="checkbox" id="@item[4]" name="status" value="@item[4]" data-assignmentid="@item[4]" />
+                }
+                else if (Convert.ToInt32(item[5]) == 0 && Convert.ToDateTime(item[2]) < DateTime.Now)
+                {
+                    <a href="" class="text-primary">Deadline Extension Request</a>
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Go Back", "Dashboard")
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.checkbox').not(this).prop('checked', false);
+        $('.checkbox').change(function () {
+            debugger
+            var checked = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '/Student/UpdateStatus?assignmentId=' + checked,
+                success: function (result) {
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+
+                }
+            });
+        });
+    });
+</script>

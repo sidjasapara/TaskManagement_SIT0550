@@ -1,0 +1,78 @@
+﻿@model IEnumerable<WebApplication1.Model.Models.PaginationModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var list = ViewBag.taskModel as List<WebApplication1.Model.Models.TaskModel>;
+}
+
+<h2>Tasks List</h2>
+
+<p>
+    @Html.ActionLink("Create New Task", "CreateTask")
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Task Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Deadline
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in list)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.taskName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.taskDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.deadline)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditTask", new { id = item.taskId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.taskId }) |
+                @if (item.deadline > DateTime.Now)
+                {
+                    @Html.ActionLink("Assign", "AssignTask", new { id = item.taskId })
+                }
+                else
+                {
+                    <span class="text-danger">Past Deadline</span>
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+@if (ViewBag.TaskAdded != null)
+{
+    <script>
+        toastr.success("@ViewBag.TaskAdded")
+    </script>
+}
+
+@if (ViewBag.count > 3)
+{
+    <div>
+        <ul class="pagination">
+            @for (int i = 1; i <= Math.Ceiling((double)ViewBag.count / 3); i++)
+            {
+                <li class="@(i == ViewBag.currentIndex ? "active" : "") btn btn-outline-info">
+                    <a href="@Url.Action("Index", "Teacher", new { current = i })">@i</a>
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+@Html.ActionLink("Go Back", "Dashboard")

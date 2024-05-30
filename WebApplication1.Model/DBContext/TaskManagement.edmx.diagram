@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1b87ca2789b241dcb064f355c821e659" Name="Diagram1">
+        <EntityTypeShape EntityType="TaskManagement.assignment" Width="1.5" PointX="12.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskManagement.cities" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskManagement.states" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskManagement.students" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskManagement.tasks" Width="1.5" PointX="10.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TaskManagement.teachers" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="TaskManagement.FK__assignmen__stude__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskManagement.FK__assignmen__taskI__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskManagement.FK__cities__stateId__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskManagement.FK__students__cityId__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskManagement.FK__teachers__cityId__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskManagement.FK__students__stateI__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskManagement.FK__teachers__stateI__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="TaskManagement.FK__tasks__creatorId__440B1D61" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TaskManagement.users" Width="1.5" PointX="5.25" PointY="9.125" />
+        <AssociationConnector Association="TaskManagement.FK__users__cityId__4E88ABD4" />
+        <AssociationConnector Association="TaskManagement.FK__users__stateId__4D94879B" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

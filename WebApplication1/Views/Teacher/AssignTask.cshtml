@@ -1,0 +1,54 @@
+﻿@model WebApplication1.Model.Models.AssignmentModel
+
+@{
+    ViewBag.Title = "AssignTask";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AssignTask</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <input type="hidden" name="taskId" value="@ViewBag.taskId" />
+
+        @if (ViewBag.studentList != null && ((MultiSelectList)ViewBag.students).Count() != 0)
+        {
+    <div class="form-group">
+        @Html.LabelFor(model => model.studentId, htmlAttributes: new { @class = "control-label col-md-2 mt-3" })
+        <select class="form-control" id="studentId" name="studentId" multiple>
+            @if (ViewBag.studentList != null && ViewBag.studentList.Count > 0)
+            {
+                foreach (var i in ViewBag.studentList)
+                {
+                    <option class="border-bottom py-3" value=@i.studentId>@i.username</option>
+                }
+            }
+        </select>
+        @Html.ValidationMessageFor(model => model.studentId, "", new { @class = "text-danger" })
+    </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    <input type="submit" value="Assign Task" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="form-group text-success">
+                This task is assigned to everyone.
+            </div>
+        }
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Go Back", "Index")
+</div>

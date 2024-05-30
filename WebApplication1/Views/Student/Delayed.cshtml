@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebApplication1.Model.Models.AssignmentModel>
+
+@{
+    ViewBag.Title = "Delayed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delayed</h2>
+
+<table class="table table-bordered">
+    <tr class="table-danger">
+        <th>Task Name</th>
+        <th>Task Description</th>
+        <th>Deadline</th>
+        <th>Teacher Name</th>
+        <th>Current Status</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (List<string> item in ViewBag.Tasks)
+    {
+        <tr>
+            <td>
+                @item[0]
+            </td>
+            <td>
+                @item[1]
+            </td>
+            <td>
+                @item[2]
+            </td>
+            <td>
+                @item[3]
+            </td>
+            <td>
+                <span class="text-danger">Past Deadline</span>
+            </td>
+            <td class="ml-2">
+                <a href="" class="text-primary">Deadline Extension Request</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Go Back", "Dashboard")
+</div>
